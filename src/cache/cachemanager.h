@@ -9,6 +9,7 @@
 
 #include "entry.h"
 #include "../callbacktimer.h"
+#include "../config.h"
 
 
 class CacheManager {

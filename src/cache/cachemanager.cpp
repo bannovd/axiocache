@@ -2,7 +2,7 @@
 
 
 CacheManager::CacheManager() {
-    timer.Start(1000, std::bind(&CacheManager::ClearOldEntries, this));
+    timer.Start(Config::TIMER_INTERVAL, std::bind(&CacheManager::ClearOldEntries, this));
 }
 
 std::optional<Entry> CacheManager::GetEntry(const boost::uuids::uuid& id) {
@@ -14,7 +14,7 @@ std::optional<Entry> CacheManager::GetEntry(const boost::uuids::uuid& id) {
 
 boost::uuids::uuid CacheManager::NewEntry(const std::string& data) {
     boost::uuids::uuid id = GenerateEntryId();
-    Entry newEntry(id, data, std::chrono::high_resolution_clock::now()); // std::chrono::system_clock::now()
+    Entry newEntry(id, data, std::chrono::high_resolution_clock::now());
     cache_[id] = newEntry;
     return id;
 }
@@ -41,6 +41,6 @@ std::vector<Entry> CacheManager::GetAllEntries() {
 void CacheManager::ClearOldEntries() {
     std::erase_if(cache_, [&] (auto entry) {
         return (std::chrono::duration<double, std::milli>(std::chrono::high_resolution_clock::now()
-                                                          - entry.second.createdAt()).count()) > 3000;
+                                                          - entry.second.createdAt()).count()) > Config::TIME_TO_LIVE_ENTRY;
     });
 }
