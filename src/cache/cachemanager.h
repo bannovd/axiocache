@@ -5,8 +5,10 @@
 #include <string>
 #include <boost/uuid/uuid.hpp>
 #include <optional>
+#include <chrono>
 
 #include "entry.h"
+#include "../callbacktimer.h"
 
 
 class CacheManager {
@@ -18,7 +20,10 @@ public:
     std::vector<Entry> GetAllEntries();
 private:
     boost::uuids::uuid GenerateEntryId();
+    void ClearOldEntries();
+
     std::map<boost::uuids::uuid, Entry> cache_;
+    CallbackTimer timer;
 };
 
 #endif // CACHEMANAGER_H

@@ -37,7 +37,8 @@ int main() {
                   << std::endl;
     }
 
-    cm.DeleteEntry(entryId2);
+    std::this_thread::sleep_for(2000ms);
+
     std::cout << "\nCache data after delete:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
         std::cout << "id: " << boost::uuids::to_string(entry.id()) << "\t"
