@@ -6,15 +6,9 @@
 
 using namespace std::chrono_literals;
 
-static std::string timePointAsString(const std::chrono::system_clock::time_point& tp) {
-    std::time_t t = std::chrono::system_clock::to_time_t(tp);
-    std::string ts = std::ctime(&t);
-    ts.resize(ts.size()-1);
-    return ts;
-}
 
 int main() {
-    std::cout << "Test cache app started." << std::endl;
+    std::cout << "Test cacheApp started." << std::endl;
 
     CacheManager cm;
 
@@ -31,25 +25,21 @@ int main() {
 
     std::cout << "\nCache data:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
-        std::cout << "id: " << boost::uuids::to_string(entry.id()) << "\t"
-                  << "data: " << entry.data() << "\t"
-                  << "created at: " << timePointAsString(entry.createdAt()) << "\t"
-                  << std::endl;
+        std::cout << entry;
     }
 
     std::this_thread::sleep_for(2000ms);
 
     std::cout << "\nCache data after delete:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
-        std::cout << "id: " << boost::uuids::to_string(entry.id()) << "\t"
-                  << "data: " << entry.data() << "\t"
-                  << "created at: " << timePointAsString(entry.createdAt()) << "\t"
-                  << std::endl;
+        std::cout << entry;
     }
 
-    //std::cout << "Press Enter to stop..." << std::endl;
-    //std::cin.get();
+    auto failEntry = cm.GetEntry(entryId1);
+    if (!failEntry.has_value()) {
+        std::cout << "\nEntry [id: " << entryId1 << "] not exist" << std::endl;
+    }
 
-    std::cout << "\nTest cache app finished." << std::endl;
+    std::cout << "\nTest cacheApp finished." << std::endl;
     return 0;
 }

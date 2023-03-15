@@ -1,13 +1,16 @@
 #include "entry.h"
 
-const boost::uuids::uuid Entry::id() noexcept {
-    return id_;
+std::ostream& operator<<(std::ostream& out, const Entry& entry) {
+    out << "id: " << boost::uuids::to_string(entry.id) << "\t"
+        << "data: " << entry.data << "\t"
+        << "created at: " << timePointAsString(entry.createdAt) << "\t"
+        << std::endl;
+    return out;
 }
 
-const std::string Entry::data() noexcept {
-    return data_;
-}
-
-const std::chrono::time_point<std::chrono::system_clock> Entry::createdAt() noexcept {
-    return createdAt_;
+static std::string timePointAsString(const std::chrono::system_clock::time_point& tp) {
+    std::time_t t = std::chrono::system_clock::to_time_t(tp);
+    std::string ts = std::ctime(&t);
+    ts.resize(ts.size()-1);
+    return ts;
 }

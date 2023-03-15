@@ -41,6 +41,6 @@ std::vector<Entry> CacheManager::GetAllEntries() {
 void CacheManager::ClearOldEntries() {
     std::erase_if(cache_, [&] (auto entry) {
         return (std::chrono::duration<double, std::milli>(std::chrono::high_resolution_clock::now()
-                                                          - entry.second.createdAt()).count()) > Config::TIME_TO_LIVE_ENTRY;
+                                                          - entry.second.createdAt).count()) > Config::TIME_TO_LIVE_ENTRY;
     });
 }
