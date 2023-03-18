@@ -8,21 +8,22 @@
 #include <string>
 #include <chrono>
 
-struct Entry {
-public:
-    Entry() = default;
-    Entry(boost::uuids::uuid id_, std::string data_, std::chrono::time_point<std::chrono::system_clock> createdAt_)
-        : id(id_), data(data_), createdAt(createdAt_) {}
-    Entry(const Entry& other)
-    : id(other.id), data(other.data), createdAt(other.createdAt) {}
+namespace cache {
+    struct Entry {
+    public:
+        Entry() = default;
+        Entry(boost::uuids::uuid id_, std::string data_, std::chrono::time_point<std::chrono::system_clock> createdAt_)
+            : id(id_), data(data_), createdAt(createdAt_) {}
+        Entry(const Entry& other)
+        : id(other.id), data(other.data), createdAt(other.createdAt) {}
 
-    boost::uuids::uuid id;
-    std::string data;
-    std::chrono::time_point<std::chrono::system_clock> createdAt;
-};
+        boost::uuids::uuid id;
+        std::string data;
+        std::chrono::time_point<std::chrono::system_clock> createdAt;
+    };
+}
 
-std::ostream& operator<<(std::ostream &out, const Entry &entry);
-static std::string timePointAsString(const std::chrono::system_clock::time_point &tp);
-
+std::ostream& operator<<(std::ostream& out, const cache::Entry& entry);
+static std::string timePointAsString(const std::chrono::system_clock::time_point& tp);
 
 #endif // ENTRY_H

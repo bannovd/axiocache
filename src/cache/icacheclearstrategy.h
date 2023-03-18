@@ -5,10 +5,12 @@
 #include <map>
 #include "entry.h"
 
-class ICacheClearStrategy {
-public:
-    virtual ~ICacheClearStrategy() = default;
-    virtual void Clear(std::map<boost::uuids::uuid, Entry> &cache) = 0;
-};
+namespace cache {
+    class ICacheClearStrategy {
+    public:
+        virtual ~ICacheClearStrategy() = default;
+        virtual void Clear(std::map<boost::uuids::uuid, Entry>& cache) = 0;
+    };
+}
 
 #endif // ICACHECLEARSTRATEGY_H

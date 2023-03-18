@@ -14,20 +14,21 @@
 #include "../callbacktimer.h"
 #include "../config.h"
 
+namespace cache {
+    class CacheManager {
+    public:
+        CacheManager();
+        std::optional<Entry> GetEntry(const boost::uuids::uuid& id);
+        boost::uuids::uuid NewEntry(const std::string& data);
+        void DeleteEntry(const boost::uuids::uuid& id);
+        std::vector<Entry> GetAllEntries();
+    private:
+        boost::uuids::uuid GenerateEntryId();
 
-class CacheManager {
-public:
-    CacheManager();
-    std::optional<Entry> GetEntry(const boost::uuids::uuid &id);
-    boost::uuids::uuid NewEntry(const std::string &data);
-    void DeleteEntry(const boost::uuids::uuid &id);
-    std::vector<Entry> GetAllEntries();
-private:
-    boost::uuids::uuid GenerateEntryId();
-
-    CacheGarbageCollector gc_;
-    std::map<boost::uuids::uuid, Entry> cache_;
-    CallbackTimer timer_;
-};
+        CacheGarbageCollector gc_;
+        std::map<boost::uuids::uuid, Entry> cache_;
+        CallbackTimer timer_;
+    };
+}
 
 #endif // CACHEMANAGER_H

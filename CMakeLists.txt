@@ -12,9 +12,12 @@ add_executable(axiocache src/main.cpp
     src/config.h src/config.cpp
     src/cache/icacheclearstrategy.h
     src/cache/expiredttlstrategy.h src/cache/expiredttlstrategy.cpp
-    src/cache/cachegarbagecollector.h src/cache/cachegarbagecollector.cpp)
+    src/cache/cachegarbagecollector.h src/cache/cachegarbagecollector.cpp
+    src/logger.h src/logger.cpp)
 
-find_package(Boost REQUIRED)
+
+find_package(Boost COMPONENTS REQUIRED)
+
 include_directories(${Boost_INCLUDE_DIRS})
 
 install(TARGETS axiocache LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
