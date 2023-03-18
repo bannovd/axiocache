@@ -24,7 +24,6 @@ public:
     std::vector<Entry> GetAllEntries();
 private:
     boost::uuids::uuid GenerateEntryId();
-    void ClearOldEntries();
 
     CacheGarbageCollector gc_;
     std::map<boost::uuids::uuid, Entry> cache_;
