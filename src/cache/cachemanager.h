@@ -6,8 +6,11 @@
 #include <boost/uuid/uuid.hpp>
 #include <optional>
 #include <chrono>
+#include <memory>
 
 #include "entry.h"
+#include "cachegarbagecollector.h"
+#include "expiredttlstrategy.h"
 #include "../callbacktimer.h"
 #include "../config.h"
 
@@ -23,6 +26,7 @@ private:
     boost::uuids::uuid GenerateEntryId();
     void ClearOldEntries();
 
+    CacheGarbageCollector gc_;
     std::map<boost::uuids::uuid, Entry> cache_;
     CallbackTimer timer;
 };

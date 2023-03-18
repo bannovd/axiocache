@@ -2,7 +2,8 @@
 
 
 CacheManager::CacheManager() {
-    timer.Start(Config::TIMER_INTERVAL, std::bind(&CacheManager::ClearOldEntries, this));
+    gc_.SetStrategy(std::make_unique<ExpiredTtlStrategy>());
+    timer.Start(Config::TIMER_INTERVAL, [&] () {gc_.RemoveGarbage(cache_);});
 }
 
 std::optional<Entry> CacheManager::GetEntry(const boost::uuids::uuid& id) {
