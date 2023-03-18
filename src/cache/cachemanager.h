@@ -18,16 +18,16 @@
 class CacheManager {
 public:
     CacheManager();
-    std::optional<Entry> GetEntry(const boost::uuids::uuid& id);
-    boost::uuids::uuid NewEntry(const std::string& data);
-    void DeleteEntry(const boost::uuids::uuid& id);    
+    std::optional<Entry> GetEntry(const boost::uuids::uuid &id);
+    boost::uuids::uuid NewEntry(const std::string &data);
+    void DeleteEntry(const boost::uuids::uuid &id);
     std::vector<Entry> GetAllEntries();
 private:
     boost::uuids::uuid GenerateEntryId();
 
     CacheGarbageCollector gc_;
     std::map<boost::uuids::uuid, Entry> cache_;
-    CallbackTimer timer;
+    CallbackTimer timer_;
 };
 
 #endif // CACHEMANAGER_H

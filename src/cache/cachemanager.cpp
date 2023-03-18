@@ -3,24 +3,24 @@
 
 CacheManager::CacheManager() {
     gc_.SetStrategy(std::make_unique<ExpiredTtlStrategy>());
-    timer.Start(Config::TIMER_INTERVAL, [&] () {gc_.RemoveGarbage(cache_);});
+    timer_.Start(Config::TIMER_INTERVAL, [&] () {gc_.RemoveGarbage(cache_);});
 }
 
-std::optional<Entry> CacheManager::GetEntry(const boost::uuids::uuid& id) {
+std::optional<Entry> CacheManager::GetEntry(const boost::uuids::uuid &id) {
     if (cache_.contains(id)) {
         return std::make_optional(cache_[id]);
     }
     return std::nullopt;
 }
 
-boost::uuids::uuid CacheManager::NewEntry(const std::string& data) {
+boost::uuids::uuid CacheManager::NewEntry(const std::string &data) {
     boost::uuids::uuid id = GenerateEntryId();
     Entry newEntry(id, data, std::chrono::high_resolution_clock::now());
     cache_[id] = newEntry;
     return id;
 }
 
-void CacheManager::DeleteEntry(const boost::uuids::uuid& id) {
+void CacheManager::DeleteEntry(const boost::uuids::uuid &id) {
     if (cache_.contains(id)) {
         cache_.erase(id);
     }
