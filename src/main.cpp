@@ -30,19 +30,24 @@ int main() {
         LOG(LogLevel::DEBUG) << entry;
     }
 
-    std::this_thread::sleep_for(2000ms);
+    auto entry1 = cm.GetEntry(entryId1);
+    std::cout << "\nGet entry:" << std::endl;
+    if (!entry1.has_value()) {
+        LOG(LogLevel::WARNING) << "Entry Id: <" << entryId1 << "> not exist";
+    } else {
+        LOG(LogLevel::DEBUG) << entry1.value();
+    }
 
-    std::cout << "\nCache data after delete:" << std::endl;
+    std::this_thread::sleep_for(1000ms);
+    std::cout << "\nCache data after delete 1s:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
         LOG(LogLevel::DEBUG) << entry;
     }
 
-    std::cout << "\nGet entry:" << std::endl;
-    auto failEntry = cm.GetEntry(entryId1);
-    if (!failEntry.has_value()) {
-        LOG(LogLevel::WARNING) << "Entry Id: <" << entryId1 << "> not exist";
-    } else {
-        LOG(LogLevel::DEBUG) << failEntry.value();
+    std::this_thread::sleep_for(2000ms);
+    std::cout << "\nCache data after delete 2s:" << std::endl;
+    for (auto entry : cm.GetAllEntries()) {
+        LOG(LogLevel::DEBUG) << entry;
     }
 
     std::cout << "\nTest cacheApp finished." << std::endl;

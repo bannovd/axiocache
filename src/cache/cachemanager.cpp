@@ -8,6 +8,7 @@ cache::CacheManager::CacheManager() {
 
 std::optional<cache::Entry> cache::CacheManager::GetEntry(const boost::uuids::uuid &id) {
     if (cache_.contains(id)) {
+        cache_[id].createdAt = std::chrono::high_resolution_clock::now();
         return std::make_optional(cache_[id]);
     }
     return std::nullopt;
