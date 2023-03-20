@@ -1,5 +1,6 @@
 #include "entry.h"
 
+
 std::ostream& operator<<(std::ostream& out, const cache::Entry& entry) {
     out << "Id: <" << boost::uuids::to_string(entry.id) << ">\t"
         << "Data: <" << entry.data << ">\t"

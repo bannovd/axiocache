@@ -1,5 +1,6 @@
 #include "cachegarbagecollector.h"
 
+
 void cache::CacheGarbageCollector::SetStrategy(std::unique_ptr<ICacheClearStrategy> &&strategy) {
     strategy_ = std::move(strategy);
 }

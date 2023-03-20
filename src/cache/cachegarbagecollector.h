@@ -5,8 +5,7 @@
 #include "icacheclearstrategy.h"
 
 namespace cache {
-    class CacheGarbageCollector
-    {
+    class CacheGarbageCollector {
     public:
         explicit CacheGarbageCollector(std::unique_ptr<ICacheClearStrategy>&& strategy = {})
             : strategy_(std::move(strategy)) {}

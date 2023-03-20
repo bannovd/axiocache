@@ -16,24 +16,19 @@ enum class LogLevel {
     OFF
 };
 
-
 class StreamDelegate {
 public:
     StreamDelegate(std::ostream& out, std::function<void(std::ostream&)> endlineStrategy);
     ~StreamDelegate();
-
     StreamDelegate(const StreamDelegate&) = delete;
     StreamDelegate& operator=(const StreamDelegate&) = delete;
-
     StreamDelegate(StreamDelegate&&) = default;
     StreamDelegate& operator=(StreamDelegate&&) = default;
-
     template<class T>
     inline StreamDelegate& operator<<(T&& out) {
         out_ << std::forward<T>(out);
         return *this;
     }
-
 private:
     std::function<void(std::ostream&)> endline_;
     std::ostream& out_;
@@ -55,7 +50,6 @@ protected:
 private:
     Logger();
     Logger(LogLevel globalLogLevel, std::ostream& out);
-
     std::ostream& logStream_;
     const LogLevel globalLogLevel_;
 };

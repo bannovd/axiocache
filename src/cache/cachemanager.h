@@ -24,7 +24,6 @@ namespace cache {
         std::vector<Entry> GetAllEntries();
     private:
         boost::uuids::uuid GenerateEntryId();
-
         CacheGarbageCollector gc_;
         std::map<boost::uuids::uuid, Entry> cache_;
         CallbackTimer timer_;

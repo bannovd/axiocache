@@ -20,7 +20,6 @@ public:
     void Stop();
     void Start(int msInterval, std::function<void(void)> func);
     bool IsRunning() const noexcept;
-
 private:
     std::atomic<bool> execute_;
     std::thread thd_;

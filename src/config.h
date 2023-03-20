@@ -2,8 +2,7 @@
 #define CONFIG_H
 
 
-class Config
-{
+class Config {
 public:
     Config() = delete;
     static const int TIME_TO_LIVE_ENTRY = 3000;

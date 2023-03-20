@@ -8,7 +8,6 @@
 
 using namespace std::chrono_literals;
 
-
 int main() {
     std::cout << "Test cacheApp started." << std::endl;
     LOGGER_INIT(LogLevel::DEBUG, std::cout);
@@ -39,13 +38,13 @@ int main() {
     }
 
     std::this_thread::sleep_for(1000ms);
-    std::cout << "\nCache data after delete 1s:" << std::endl;
+    std::cout << "\nCache data after delete:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
         LOG(LogLevel::DEBUG) << entry;
     }
 
     std::this_thread::sleep_for(2000ms);
-    std::cout << "\nCache data after delete 2s:" << std::endl;
+    std::cout << "\nCache data after delete:" << std::endl;
     for (auto entry : cm.GetAllEntries()) {
         LOG(LogLevel::DEBUG) << entry;
     }
