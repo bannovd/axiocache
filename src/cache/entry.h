@@ -10,7 +10,6 @@
 
 namespace cache {
     struct Entry {
-    public:
         Entry() = default;
         Entry(boost::uuids::uuid id_, std::string data_, std::chrono::time_point<std::chrono::system_clock> createdAt_)
             : id(id_), data(data_), createdAt(createdAt_) {}
