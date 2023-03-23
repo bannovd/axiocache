@@ -1,2 +1,2 @@
 # simple.cache 
-pet-project of simple cache with Garbage collector strategies
+Simple cache with Garbage collector strategies
