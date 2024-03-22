@@ -30,4 +30,7 @@
 *.exe
 *.out
 *.app
-/CMakeLists.txt.user
+
+CMakeLists.txt.*
+/build
+.cache
